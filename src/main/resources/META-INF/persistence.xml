@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="bmdb">
+		<jta-data-source>jdbc:h2:~/bmdm</jta-data-source>
+		<class>com.bmdb.persist.User</class>
+		<class>com.bmdb.persist.Review</class>
+		<class>com.bmdb.persist.Movie</class>
+		<class>com.bmdb.persist.Genre</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.jdbc.user" value="sa" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:~/bmdb" />
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+
+			<!-- EclipseLink will create tables(if they don't exist) according to 
+				the given persistence classes. -->
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.exclude-eclipselink-orm" value="true" />
+			<property name="eclipselink.jdbc.native-sql" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>

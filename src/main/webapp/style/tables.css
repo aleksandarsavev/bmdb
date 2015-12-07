@@ -1,0 +1,12 @@
+table th, table td {
+	padding: 3px;
+	border: 1px solid;
+}
+
+th {
+	cursor: pointer;
+}
+
+th:HOVER {
+	font-color: #010101;
+}
