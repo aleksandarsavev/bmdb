@@ -13,7 +13,6 @@ public class User {
 	private String userName, password, email, name;
 	private int id;
 
-	@Column(name = "USERNAME")
 	public String getUserName() {
 		return userName;
 	}
@@ -48,7 +47,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true)
+	@Column(name = "id")
 	public int getId() {
 		return id;
 	}

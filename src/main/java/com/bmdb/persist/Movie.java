@@ -26,7 +26,7 @@ public class Movie {
 	private String info, name;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true)
+	@Column(name = "id")
 	private int id;
 
 	public String getCountry() {
