@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>My account</title>
+<link rel="stylesheet" type="text/css" href="style/tables.css" />
 </head>
 <%
     User user = (User) request.getSession().getAttribute("username");

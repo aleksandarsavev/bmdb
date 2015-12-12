@@ -16,9 +16,6 @@ import com.bmdb.persist.User;
 @WebServlet(urlPatterns = { "/login" }, loadOnStartup = 1)
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	static{
-		System.out.println("FuckYou");
-	}
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */

@@ -79,22 +79,22 @@
                 <td><%=movie.getInfo()%></td>
                 <td><%=movie.getYear()%></td>
                 <td><%=movie.getGenresStr()%></td>
-                <td>
-                    <%
-                    	if (user != null) {
-                    %><a href="addreview.jsp?movieId=<%=movie.getId()%>"
+                <%
+                    if (user != null) {
+                %><td><a
+                    href="addreview.jsp?movieId=<%=movie.getId()%>"
                     title="Add review and rating for the movie">Add
-                        review</a> <%
- 	}
- %>
-                </td>
+                        review</a></td>
+                <%
+                    }
+                %>
                 <td><a
                     href="reviews.jsp?movieId=<%=movie.getId()%>"
                     title="Show all reviews for the movie">Reviews</a></td>
                 <%
                 	if (user != null && user.getName().equals("admin")) {
                 %>
-                <td><a href="" title="Delete movie">Delete</td>
+                <td><a href="" title="Delete movie">Delete</a></td>
                 <%
                 	}
                 %>
