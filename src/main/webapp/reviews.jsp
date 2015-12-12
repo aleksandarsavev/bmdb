@@ -10,6 +10,7 @@
 <title>Reviews</title>
 <script type="text/javascript" src="script/navigator.js"></script>
 <link rel="stylesheet" type="text/css" href="style/navigator.css" />
+<link rel="stylesheet" type="text/css" href="style/tables.css" />
 </head>
 <%
 	String parameterUser = request.getParameter("userId");

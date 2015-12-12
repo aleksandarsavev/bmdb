@@ -51,7 +51,7 @@ public class AddReviewServlet extends HttpServlet {
 				DBContext.get().getMoviesProvider().getMovie(Integer.parseInt(request.getParameter("movieId"))));
 		review.setUser((User) request.getSession().getAttribute("username"));
 		DBContext.get().getReviewsProvider().add(review);
-		doGet(request, response);
+		response.sendRedirect("reviews.jsp?movieId=" + review.getMovie().getId());
 	}
 
 }
