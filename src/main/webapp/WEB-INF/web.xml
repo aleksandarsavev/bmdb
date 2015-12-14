@@ -21,6 +21,10 @@
 		<servlet-class>com.bmdb.AddReviewServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>MoviesServlet</servlet-name>
+		<servlet-class>com.bmdb.MoviesServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>AddMovieServlet</servlet-name>
 		<display-name>AddMovieServlet</display-name>
 		<description></description>
@@ -45,5 +49,9 @@
 	<servlet-mapping>
 		<servlet-name>AddMovieServlet</servlet-name>
 		<url-pattern>/addmovie</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MoviesServlet</servlet-name>
+		<url-pattern>/movies</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -58,4 +58,11 @@ public class MoviesProvider {
         entityManager.persist(movie);
         entityManager.getTransaction().commit();
     }
+
+
+    public void delete(Movie movie) {
+        entityManager.getTransaction().begin();
+        entityManager.remove(movie);
+        entityManager.getTransaction().commit();
+    }
 }

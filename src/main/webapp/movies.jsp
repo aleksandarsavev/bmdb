@@ -46,8 +46,8 @@
 		window.location = "movies.jsp?" + [ orderBy, orderr, search ].join("&");
 	}
 	
-	function deleteMovie(id){
-		post("movies", "id")
+	function deleteMovie(idm){
+		post("movies", "func=delete&id=" + idm);
 	}
 </script>
 </head>

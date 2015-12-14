@@ -56,7 +56,13 @@ public class MoviesServlet
         if (func != null && func.equals("delete"))
         {
             MoviesProvider movies = DBContext.get().getMoviesProvider();
-            movies.delete(request.getParameter("id"));
+            String idParameter = request.getParameter("id");
+            if (idParameter != null) {
+                movies.delete(movies.getMovie(Integer.parseInt(idParameter)));
+            }
+            else {
+                System.err.println("Movie id cannot be null");
+            }
         }
     }
 }
