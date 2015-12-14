@@ -1,5 +1,6 @@
 package com.bmdb;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -13,54 +14,49 @@ import com.bmdb.persist.DBContext;
 import com.bmdb.persist.Movie;
 import com.bmdb.persist.MoviesProvider;
 
+
 /**
  * Servlet implementation class MoviesServlet
  */
 @WebServlet("/movies")
-public class MoviesServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class MoviesServlet
+    extends HttpServlet
+{
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public MoviesServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public MoviesServlet()
+    {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String func = request.getParameter("func");
-		if (func != null && func.equals("getMovies")) {
-			MoviesProvider movies = DBContext.get().getMoviesProvider();
-			response.setContentType("application/json");
-			PrintWriter writer = response.getWriter();
-			getMoviesResponse(movies, writer);
-		}
-	}
 
-	private void getMoviesResponse(MoviesProvider movies, PrintWriter writer) {
-		writer.print("{\"movies\":[");
-		for (Movie movie : movies.getMovies()) {
-			writer.print(String.format(
-					"\"movie\":{\"id\": \"%s\", \"name\": \"%s\", \"year\": \"%s\", \"info\": \"%s\", \"country\": \"%s\"}",
-					movie.getId(), movie.getName(), movie.getYear(), movie.getInfo(), movie.getCountry()));
-		}
-		writer.print("]}");
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException
+    {
+        // TODO Auto-generated method stub
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
 
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException
+    {
+        String func = request.getParameter("func");
+        if (func != null && func.equals("delete"))
+        {
+            MoviesProvider movies = DBContext.get().getMoviesProvider();
+            movies.delete(request.getParameter("id"));
+        }
+    }
 }

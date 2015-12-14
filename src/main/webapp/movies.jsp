@@ -45,6 +45,10 @@
 		var search = "search=" + value;
 		window.location = "movies.jsp?" + [ orderBy, orderr, search ].join("&");
 	}
+	
+	function deleteMovie(id){
+		post("movies", "id")
+	}
 </script>
 </head>
 <body>
@@ -94,7 +98,7 @@
                 <%
                 	if (user != null && user.getName().equals("admin")) {
                 %>
-                <td><a href="" title="Delete movie">Delete</a></td>
+                <td><a href="" onclick="deleteMovie(<%=movie.getId()%>)" title="Delete movie">Delete</a></td>
                 <%
                 	}
                 %>
