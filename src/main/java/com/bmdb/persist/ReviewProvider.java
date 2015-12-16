@@ -51,6 +51,12 @@ public class ReviewProvider
     }
 
 
+    /**
+     * Gets a reviews list filtered by the given movie.
+     * 
+     * @param movie movie for filter
+     * @return a list of filtered reviews
+     */
     public List<Review> getReviewsByMovie(Movie movie)
     {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -94,6 +100,11 @@ public class ReviewProvider
     }
 
 
+    /**
+     * Removes all reviews for the given movie.
+     * 
+     * @param movie movie which will be used for filtering of the reviews
+     */
     public void removeByMovie(Movie movie)
     {
         getReviewsByMovie(movie).stream().forEach(x -> remove(x));

@@ -23,6 +23,15 @@ public class MoviesProvider {
         return createQuery.getResultList();
     }
 
+
+    /**
+     * Order a list of movies.
+     * 
+     * @param orderBy property for sorting: "name" or "year" are supported values
+     * @param ascending direction of sorting
+     * @param source source to be sorted
+     * @return a sorted list
+     */
     public List<Movie> orderBy(String orderBy, boolean ascending, List<Movie> source) {
         int dir = ascending ? 1 : -1;
         return source.stream().sorted((x, y) -> {
@@ -67,6 +76,12 @@ public class MoviesProvider {
         entityManager.getTransaction().commit();
     }
 
+
+    /**
+     * Deletes a movie from the database by its id. It will delete all related data to the movie.
+     * 
+     * @param id id of the movie
+     */
 	public void delete(int id) {
 		delete(getMovie(id));
 	}
