@@ -22,7 +22,22 @@
 %>
 <body>
 	<jsp:include page="navigation.jsp"></jsp:include>
-	<div id="container">
+	<h3>
+		Hi,
+		<%=user.getUserName()%>!<%=(source.isEmpty() ? " You don't have any reviews yet."
+                            : "Here is a list of your reviews.")%></h3>
+	<div>
+		<%
+		    if (source.isEmpty())
+		    {
+		        %>
+		        <span>Click <a href="movies.jsp">here</a> and see a full list with movies.</span><br/>
+		        <span>Click <a href="addmovie.jsp">here</a> and add movies to your favorite data base.</span>
+		        <%
+		    }
+		    else
+		    {
+		%>
 		<table id="movies_table">
 			<tr>
 				<th>Movie title</th>
@@ -34,22 +49,18 @@
 			    for (Review movie : source) {
 			%>
 			<tr>
-				<td><%=movie.getMovie().getName()%></td>
+				<td><a href="reviews.jsp?movieId=<%=movie.getMovie().getId()%>"><%=movie.getMovie().getName()%></a></td>
 				<td><%=movie.getRating()%></td>
 				<td><%=movie.getComment()%></td>
-				<td><%=movie.getUser().getName()%></td>
-				<%
-				    if (request.getAttribute("username") != null) {
-				%>
-				<td><a href="addreview.jsp?movieId=<%=movie.getId()%>"
-					title="Add review and reting for the movie">Add review</a></td>
-				<%
-				    }
-				%>
+				<td>Myself</td>
 			</tr>
 			<%
 			    }
 			%>
 		</table>
+		<span>You can't find the movie you love or hate? Click <a
+			href="addmovie.jsp">here</a> and add movies to your favorite data
+			base.
+		</span><%} %>
 	</div>
 </html>

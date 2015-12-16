@@ -22,7 +22,7 @@
 			method="post" autocomplete="on">
 			User name:<br> <input class="field" type="text" name="username"
 				required> <br>Name:<br> <input class="field"
-				type="text" style="float: right" name="name"><br>E-mail:<br>
+				type="text" name="name"><br>E-mail:<br>
 			<input class="field" type="email" name="email" autocomplete="off"
 				required><br>Password:<br> <input class="field"
 				type="password" name="password" required><br>Confirm

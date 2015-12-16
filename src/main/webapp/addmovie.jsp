@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.bmdb.persist.DBContext"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
@@ -42,12 +43,15 @@
 			<br> Year:<br> <input type="number" name="year" min="1896"
 				max="<%=Calendar.getInstance().get(Calendar.YEAR)%>" step="1">
 			<br> <span>Genres:</span>
-			<div style="max-width: 300px">
+			<div style="max-width: 500px">
 				<%
-					for (Genre genre : DBContext.get().getGenresProvider().getGenres()) {
+					List<Genre> genres = DBContext.get().getGenresProvider().getGenres();
+					for (int i =0; i<genres.size();i++) {
+						Genre genre = genres.get(i);
 				%>
+				<span ><div style="width:150px;display: inline-block;">
 				<input type="checkbox" value="<%=genre.getId()%>"
-					onclick="pp(this);"><%=genre.getName()%></input>
+					onclick="pp(this);"><%=genre.getName()%></input></div></span>
 				<%
 					}
 				%>

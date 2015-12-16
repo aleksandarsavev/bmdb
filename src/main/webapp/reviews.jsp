@@ -24,6 +24,13 @@
 %>
 <body>
 	<jsp:include page="navigation.jsp"></jsp:include>
+	<%
+		if (parameterMovie != null) {
+	%><h3>
+		All reviews for the movie '<%=DBContext.get().getMoviesProvider().getMovie(Integer.parseInt(parameterMovie)).getName()%>'
+	</h3>
+	<%
+	} %>
 	<div id="container">
 		<table id="movies_table">
 			<tr>

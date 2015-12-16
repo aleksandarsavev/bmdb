@@ -61,8 +61,13 @@ public class MoviesProvider {
 
 
     public void delete(Movie movie) {
+        DBContext.get().getReviewsProvider().removeByMovie(movie);
         entityManager.getTransaction().begin();
         entityManager.remove(movie);
         entityManager.getTransaction().commit();
     }
+
+	public void delete(int id) {
+		delete(getMovie(id));
+	}
 }
