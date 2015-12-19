@@ -16,7 +16,6 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		User result = DBContext.get().getUsersProvider().login(username, password);
@@ -24,7 +23,9 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("login.jsp?success=false");
 		} else {
 			request.getSession().setAttribute("username", result);
-			response.sendRedirect("account.jsp");
+			String redir = request.getParameter("redirect");
+			redir=redir==null||redir.equals("null")?"account.jsp":redir;
+			response.sendRedirect(redir);
 		}
 	}
 

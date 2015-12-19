@@ -1,3 +1,4 @@
+<%@page import="com.bmdb.persist.Review"%>
 <%@page import="com.bmdb.persist.User"%>
 <%@page import="com.bmdb.persist.DBContext"%>
 <%@page import="com.bmdb.persist.Movie"%>
@@ -17,6 +18,9 @@
 	    int movieId = Integer.parseInt(request.getParameter("movieId"));
 	    Movie movie = DBContext.get().getMoviesProvider().getMovie(movieId);
 	    User user = (User) session.getAttribute("username");
+        Review review = DBContext.get().getReviewsProvider().getReview(user, movie);
+        String oldComment = review==null? "" : review.getComment();
+        String oldRating = review==null? "1" : Integer.toString(review.getRating());
 	    if (user == null) {
 	%>
 	<span>You have to be logged in to add a review for a movie.
@@ -25,11 +29,11 @@
 	<%
 	    } else {
 	%>
-	<span>Add review for <span><%=movie.getName()%>(<%=movie.getYear()%>)</span></span>
+	<h3>Add review for movie <span><%=movie.getName()%>(<%=movie.getYear()%>)</span></h3>
 	<form action="addreview" method="post">
 		<input name="movieId" type="hidden" value="<%=movieId%>"></input>
-		Comment:<br> <input type="text" name="comment" required>
-		<br> Rating:<br> <select name="rating">
+		Comment:<br> <input type="text" name="comment" required value="<%=oldComment%>">
+		<br> Rating:<br> <select name="rating" value="<%=oldRating%>">
 			<%
 			    for (int i = 1; i < 11; i++) {
 			%>

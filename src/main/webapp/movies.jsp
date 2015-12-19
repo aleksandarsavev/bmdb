@@ -60,10 +60,29 @@
 	<oo id="order" value="<%=order == null ? new String() : order%>" />
 	<oo id="search" value="<%=search == null ? new String() : search%>" />
 	<jsp:include page="navigation.jsp"></jsp:include>
+    <h3>Movies</h3>
+    <%if(DBContext.get().getMoviesProvider().getMovies().isEmpty()){
+        %>
+        <span>The movie data base is empty. You can add movies by clicking 
+        <a href="addmovie.jsp">here</a> and filling the form.</span><%
+    }else{ %>
 	<div id="container">
 		<input id="searchTxt" type="text" value="<%=search%>"/><input type="button"
 			value="Search"
 			onclick="search(document.getElementById('searchTxt').value)" />
+        
+         <% List<Movie> source = DBContext.get().getMoviesProvider().getMovies();
+                if (search != null && search.length() > 0) {
+                    source = DBContext.get().getMoviesProvider().searchInMovies(search, source);
+                }
+                if (orderBy != null) {
+                    source = DBContext.get().getMoviesProvider().orderBy(orderBy, order.equals("asc"), source);
+                }
+                
+        if(source.isEmpty()){%>
+        <br>
+        <span>BMDB couldn't find any movies with the search word '<%=search  %>'</span>
+        <%}else{%>
 		<table id="movies_table">
 			<tr>
 				<th id="name_th" onclick="sortby('name')" title="Sort by Title">Title</th>
@@ -73,13 +92,6 @@
 				<th colspan="3">Options</th>
 			</tr>
 			<%
-				List<Movie> source = DBContext.get().getMoviesProvider().getMovies();
-				if (search != null && search.length() > 0) {
-					source = DBContext.get().getMoviesProvider().searchInMovies(search, source);
-				}
-				if (orderBy != null) {
-					source = DBContext.get().getMoviesProvider().orderBy(orderBy, order.equals("asc"), source);
-				}
 				for (Movie movie : source) {
 			%>
 			<tr>
@@ -114,7 +126,8 @@
 		<span>You can't find the movie you love or hate? Click <a
 			href="addmovie.jsp">here</a> and add movies to your favorite data
 			base.
-		</span>
+		</span><%} %>
+        <%} %>
 	</div>
 </body>
 </html>

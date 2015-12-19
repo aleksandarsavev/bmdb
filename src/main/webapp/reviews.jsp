@@ -30,9 +30,14 @@
 		All reviews for the movie '<%=DBContext.get().getMoviesProvider().getMovie(Integer.parseInt(parameterMovie)).getName()%>'
 	</h3>
 	<%
-	} %>
-	<div id="container">
-		<table id="movies_table">
+	} else if (parameterUser != null) {
+    %><h3>
+        All reviews from user <%=DBContext.get().getUsersProvider().getUser(parameterUser).getUserName()%>
+    </h3>
+    <%
+    } %>
+	<div>
+		<table>
 			<tr>
 				<th>Movie title</th>
 				<th>Rating</th>
@@ -40,21 +45,21 @@
 				<th>Review by</th>
 			</tr>
 			<%
-				for (Review movie : source) {
+				for (Review review : source) {
 			%>
 			<tr>
-				<td><%=movie.getMovie().getName()%></td>
-				<td><%=movie.getRating()%></td>
-				<td><%=movie.getComment()%></td>
-				<td><%=(movie.getUser() == null ? "null" : movie.getUser().getName())%></td>
-				<%
-					if (request.getAttribute("username") != null) {
-				%>
-				<td><a href="addreview.jsp?movieId=<%=movie.getId()%>"
-					title="Add review and reting for the movie">Add review</a></td>
-				<%
-					}
-				%>
+				<td>
+                <%if(parameterMovie==null) {%><a href="reviews.jsp?movieId=<%=review.getMovie().getId()%>" title="Go to reviews for '<%=review.getMovie().getName()%>'"><%} %>
+                <%=review.getMovie().getName()%>
+                <%if(parameterMovie==null) {%></a><%} %>
+                </td>
+				<td><%=review.getRating()%></td>
+				<td><%=review.getComment()%></td>
+				<td>
+                <%if(parameterUser==null) {%><a href="reviews.jsp?userId=<%=review.getUser().getUserName()%>" title="Go to reviews from user <%=review.getUser().getName()%>"><%} %>
+                <%=review.getUser().getName()%>
+                <%if(parameterUser==null) {%></a><%} %>
+                </td>
 			</tr>
 			<%
 				}

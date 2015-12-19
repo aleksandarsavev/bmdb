@@ -28,7 +28,7 @@
 
 <%
 	if (request.getSession().getAttribute("username") == null) {
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("login.jsp?redirect=addmovie.jsp");
             }
 %>
 <body>
@@ -41,7 +41,7 @@
 			autocomplete="on">
 			Movie title:<br> <input type="text" name="title" required>
 			<br> Year:<br> <input type="number" name="year" min="1896"
-				max="<%=Calendar.getInstance().get(Calendar.YEAR)%>" step="1">
+				max="<%=Calendar.getInstance().get(Calendar.YEAR)%>" step="1" required>
 			<br> <span>Genres:</span>
 			<div style="max-width: 500px">
 				<%
@@ -55,7 +55,7 @@
 				<%
 					}
 				%>
-				<textarea rows="10" cols="60" name="info"></textarea>
+				<textarea rows="10" cols="60" name="info" required></textarea>
 				<input required="required" id="genres" name="genres" type="text"
 					hidden="true" />
 			</div>

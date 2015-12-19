@@ -26,6 +26,7 @@
 				type="password" name="password" required> <br> <input
 				type="submit" value="Log in"> <br> <span>If you
 				don't have an account <a href="register.jsp">click here!</a>
+                <input type="hidden" name="redirect" value="<%=request.getParameter("redirect") %>" />
 			</span>
 		</form>
 	</div>

@@ -2,6 +2,7 @@ package com.bmdb.persist;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -72,18 +73,18 @@ public class ReviewProvider
         return results;
     }
 
+    
+    public Review getReview(User user, Movie movie) {
+        Optional<Review> review = getReviewsByUser(user).stream().filter(x -> x.getMovie() == movie).findFirst();
+        return review.isPresent() ? review.get() : null;
+    }
 
     public void add(Review review)
     {
         // remove a review for the movie if the user has already added review
-        List<Review> reviewsByUser = getReviewsByUser(review.getUser());
-        for (Review r : reviewsByUser)
-        {
-            if (r.getMovie().equals(review.getMovie()))
-            {
-                remove(r);
-                break;
-            }
+        Review oldReview = getReview(review.getUser(), review.getMovie());
+        if (oldReview != null) {
+            remove(oldReview);
         }
 
         entityManager.getTransaction().begin();
