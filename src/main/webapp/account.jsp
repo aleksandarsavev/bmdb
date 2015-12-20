@@ -10,6 +10,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>My account</title>
 <link rel="stylesheet" type="text/css" href="style/tables.css" />
+<script type="text/javascript">
+function deleteReview(reviewId){
+	post("deletereview?id="+reviewId, null);
+	location.reload(true);
+}
+</script>
 </head>
 <%
     User user = (User) request.getSession().getAttribute("username");
@@ -44,6 +50,7 @@
 				<th>Rating</th>
 				<th>Comment</th>
 				<th>Review by</th>
+                <th colspan="2">Options</th>
 			</tr>
 			<%
 			    for (Review movie : source) {
@@ -53,6 +60,8 @@
 				<td><%=movie.getRating()%></td>
 				<td><%=movie.getComment()%></td>
 				<td>Myself</td>
+                <td title="Change your review for '<%=movie.getMovie().getName()%>'"><a href="addreview.jsp?movieId=<%=movie.getMovie().getId()%>">Edit</a></td>
+                <td title="Delete the review"><a href="#" onclick="deleteReview(<%=movie.getId()%>)">Delete</a></td>
 			</tr>
 			<%
 			    }

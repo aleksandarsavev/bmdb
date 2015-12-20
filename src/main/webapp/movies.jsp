@@ -52,13 +52,14 @@
 		formData.append("id", idm);
 		formData.append("redirect", "movies.jsp");
 		post("deletemovie?id=" + idm + "&redirect=movies.jsp", null);
+		location.reload(true);
 	}
 </script>
 </head>
 <body>
-	<oo id="orderBy" value="<%=orderBy%>" />
-	<oo id="order" value="<%=order == null ? new String() : order%>" />
-	<oo id="search" value="<%=search == null ? new String() : search%>" />
+	<oo id="orderBy" value="<%=orderBy%>" ></oo>
+	<oo id="order" value="<%=order == null ? new String() : order%>" ></oo>
+	<oo id="search" value="<%=search == null ? new String() : search%>" ></oo>
 	<jsp:include page="navigation.jsp"></jsp:include>
     <h3>Movies</h3>
     <%if(DBContext.get().getMoviesProvider().getMovies().isEmpty()){

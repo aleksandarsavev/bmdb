@@ -73,6 +73,21 @@ public class ReviewProvider
         return results;
     }
 
+
+    public Review getReviewById(int id) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Review> q = cb.createQuery(Review.class);
+        Root<Review> c = q.from(Review.class);
+        ParameterExpression<Integer> p = cb.parameter(Integer.class);
+        q.select(c).where(cb.equal(c.get("id"), p));
+
+        TypedQuery<Review> query = entityManager.createQuery(q);
+        query.setParameter(p, id);
+        List<Review> results = query.getResultList();
+        return results.isEmpty() ? null : results.get(0);
+    }
+
     
     public Review getReview(User user, Movie movie) {
         Optional<Review> review = getReviewsByUser(user).stream().filter(x -> x.getMovie() == movie).findFirst();
@@ -100,6 +115,17 @@ public class ReviewProvider
         entityManager.getTransaction().commit();
     }
 
+    /**
+     * Removes a review by its ID.
+     * 
+     * @param id id of the review
+     */
+    public void remove(int id) {
+        Review review = getReviewById(id);
+        if (review != null) {
+            remove(review);
+        }
+    }
 
     /**
      * Removes all reviews for the given movie.
