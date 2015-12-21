@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Root;
 
 public class UsersProvider {
 	private EntityManager entityManager;
@@ -61,4 +65,30 @@ public class UsersProvider {
 		}
 		return null;
 	}
+
+
+    public User getUserById(int id)
+    {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<User> q = cb.createQuery(User.class);
+        Root<User> c = q.from(User.class);
+        ParameterExpression<Integer> p = cb.parameter(Integer.class);
+        q.select(c).where(cb.equal(c.get("id"), p));
+
+        TypedQuery<User> query = entityManager.createQuery(q);
+        query.setParameter(p, id);
+        List<User> results = query.getResultList();
+        return results.isEmpty() ? null : results.get(0);
+    }
+
+
+    public void remove(int id)
+    {
+        User user = getUserById(id);
+        DBContext.get().getReviewsProvider().removeByUser(user);
+        entityManager.getTransaction().begin();
+        entityManager.persist(user);
+        entityManager.getTransaction().commit();
+    }
 }

@@ -136,4 +136,10 @@ public class ReviewProvider
     {
         getReviewsByMovie(movie).stream().forEach(x -> remove(x));
     }
+
+
+    public void removeByUser(User user)
+    {
+        getReviewsByUser(user).stream().forEach(x -> remove(x));
+    }
 }

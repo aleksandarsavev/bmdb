@@ -1,5 +1,6 @@
 function h() {
 	post("logout", undefined);
+	window.location="movies.jsp";
 }
 
 function post(servlet, data){

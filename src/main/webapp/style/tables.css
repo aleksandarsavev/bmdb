@@ -3,10 +3,10 @@ table th, table td {
 	border: 1px solid;
 }
 
-th {
+th.sort {
 	cursor: pointer;
 }
 
-th:HOVER {
-	font-color: #010101;
+th.sort:HOVER {
+	font-weight: bolder;
 }

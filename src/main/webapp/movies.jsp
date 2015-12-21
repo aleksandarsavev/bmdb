@@ -86,9 +86,9 @@
         <%}else{%>
 		<table id="movies_table">
 			<tr>
-				<th id="name_th" onclick="sortby('name')" title="Sort by Title">Title</th>
+				<th id="name_th" class="sort" onclick="sortby('name')" title="Sort by Title">Title</th>
 				<th id="info_th">Info</th>
-				<th id="year_th" title="Sort by Year" onclick="sortby('year')">Year</th>
+				<th id="year_th" class="sort" title="Sort by Year" onclick="sortby('year')">Year</th>
 				<th id="genre_th">Genre</th>
 				<th colspan="3">Options</th>
 			</tr>
