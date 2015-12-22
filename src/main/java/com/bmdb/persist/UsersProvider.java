@@ -88,7 +88,7 @@ public class UsersProvider {
         User user = getUserById(id);
         DBContext.get().getReviewsProvider().removeByUser(user);
         entityManager.getTransaction().begin();
-        entityManager.persist(user);
+        entityManager.remove(user);
         entityManager.getTransaction().commit();
     }
 }

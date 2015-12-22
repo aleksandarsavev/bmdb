@@ -37,6 +37,9 @@
     <%
     } %>
 	<div>
+    <%if(source.isEmpty()){%>
+    <h4>The result doesn't contain any reviews.</h4>
+    <%}else{ %>
 		<table>
 			<tr>
 				<th>Movie title</th>
@@ -57,7 +60,7 @@
 				<td><%=review.getComment()%></td>
 				<td>
                 <%if(parameterUser==null) {%><a href="reviews.jsp?userId=<%=review.getUser().getUserName()%>" title="Go to reviews from user <%=review.getUser().getName()%>"><%} %>
-                <%=review.getUser().getName()%>
+                <%=review.getUser().getUserName()%>
                 <%if(parameterUser==null) {%></a><%} %>
                 </td>
 			</tr>
@@ -65,6 +68,7 @@
 				}
 			%>
 		</table>
+        <%} %>
 	</div>
 </body>
 </html>

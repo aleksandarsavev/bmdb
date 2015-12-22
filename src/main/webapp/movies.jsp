@@ -48,9 +48,6 @@
 	}
 	
 	function deleteMovie(idm){
-		var formData = new FormData(); 
-		formData.append("id", idm);
-		formData.append("redirect", "movies.jsp");
 		post("deletemovie?id=" + idm + "&redirect=movies.jsp", null);
 		location.reload(true);
 	}

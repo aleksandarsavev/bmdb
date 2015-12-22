@@ -9,7 +9,7 @@
 <body>
 	<jsp:include page="navigation.jsp"></jsp:include>
 	<div>
-		<h1>Log in</h1>
+		<h3>Log in</h3>
 
 		<%
 			if (request.getParameter("success") != null && request.getParameter("success").equals("false")) {
