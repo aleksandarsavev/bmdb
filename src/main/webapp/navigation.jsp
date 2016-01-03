@@ -15,7 +15,7 @@
 		<%
 		    } else {
 		%>
-		<li class="nav"><a href="account.jsp">My account</a></li>
+		<li class="nav"><a href="account.jsp" title="You are logged in as <%= name.getUserName() %>">My account(<%= name.getUserName() %>)</a></li>
 		<li class="nav"><a href="" onclick="h()">Logout</a></li>
 		<%
 		    }

@@ -20,7 +20,7 @@
 <script type="text/javascript">
     function removee(idm) {
         post("deleteuser?id="+idm, null);
-        location.reload();
+        window.setTimeout(function(){location.reload;}, 2000);
     }
 </script>
 </head>
