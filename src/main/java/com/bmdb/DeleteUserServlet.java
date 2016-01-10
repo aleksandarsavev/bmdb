@@ -21,5 +21,11 @@ public class DeleteUserServlet
     {
         String userId = request.getParameter("id");
         DBContext.get().getUsersProvider().remove(Integer.parseInt(userId));
+        try {
+			Thread.sleep(600);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        response.sendRedirect("users.jsp");
     }
 }

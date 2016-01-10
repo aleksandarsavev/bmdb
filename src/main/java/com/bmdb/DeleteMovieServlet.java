@@ -19,7 +19,12 @@ public class DeleteMovieServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		DBContext.get().getMoviesProvider().delete(id);
-		response.sendRedirect(request.getParameter("redirect"));
+		try {
+			Thread.sleep(600);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		response.sendRedirect("movies.jsp");
 	}
 
 }

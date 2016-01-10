@@ -48,6 +48,12 @@
 		<description></description>
 		<servlet-class>com.bmdb.DeleteUserServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<display-name>UpdateUserServlet</display-name>
+		<description></description>
+		<servlet-class>com.bmdb.UpdateUserServlet</servlet-class>
+	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -83,5 +89,9 @@
 	<servlet-mapping>
 		<servlet-name>DeleteUserServlet</servlet-name>
 		<url-pattern>/deleteuser</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UpdateUserServlet</servlet-name>
+		<url-pattern>/updateuser</url-pattern>
 	</servlet-mapping>
 </web-app>

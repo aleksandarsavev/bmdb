@@ -15,8 +15,13 @@ public class LogoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-		request.getSession().invalidate();
 		request.getSession().removeAttribute("username");
+		request.getSession().invalidate();
+		try {
+			Thread.sleep(600);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		response.sendRedirect("index.jsp");
 	}
 

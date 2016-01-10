@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="style/navigator.css" />
 <div>
 	<ul class="nav">
+		<li class="nav"><a href="index.jsp">Home</a></li>
 		<li class="nav"><a href="movies.jsp">Movies</a></li>
 		<%
 		    User name = (User) session.getAttribute("username");

@@ -43,8 +43,8 @@ public class MoviesProvider {
     }
 
     public List<Movie> searchInMovies(String search, List<Movie> source) {
-        return source.stream().filter(x -> x.getName().toLowerCase().contains(search.toLowerCase())
-                || x.getInfo().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
+        return source.stream().filter(x -> x.getName().toLowerCase().contains(search.toLowerCase()) || x.getInfo().toLowerCase().contains(search.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     public Movie getMovie(int id) {

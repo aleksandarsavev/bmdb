@@ -91,4 +91,12 @@ public class UsersProvider {
         entityManager.remove(user);
         entityManager.getTransaction().commit();
     }
+
+	public void update(User user, String name, String email) {
+		// TODO Auto-generated method stub
+		  entityManager.getTransaction().begin();
+	        user.setName(name);
+	        user.setEmail(email);
+	        entityManager.getTransaction().commit();
+	}
 }

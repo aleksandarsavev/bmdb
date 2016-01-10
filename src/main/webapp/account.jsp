@@ -30,8 +30,9 @@ function deleteReview(reviewId){
 	<jsp:include page="navigation.jsp"></jsp:include>
 	<h3>
 		Hi,
-		<%=user.getUserName()%>!<%=(source.isEmpty() ? " You don't have any reviews yet."
+		<%=user.getName()%>!<%=(source.isEmpty() ? " You don't have any reviews yet."
                             : "Here is a list of your reviews.")%></h3>
+    <h3>Change your personal settings <a href="editaccount.jsp">here</a>.</h3>
 	<div>
 		<%
 		    if (source.isEmpty())

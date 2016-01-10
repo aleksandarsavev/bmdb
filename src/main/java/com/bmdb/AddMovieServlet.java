@@ -19,7 +19,6 @@ public class AddMovieServlet extends HttpServlet {
             throws ServletException, IOException {
         Movie movie = new Movie();
         movie.setName(request.getParameter("title"));
-        movie.setCountry(request.getParameter("country"));
         movie.setInfo(request.getParameter("info"));
         movie.setYear(Integer.parseInt(request.getParameter("year")));
         movie.setGenres(Arrays.asList(request.getParameter("genres").split(",")).stream().filter(x -> x.length() > 0)

@@ -21,21 +21,13 @@ public class Movie {
 			@JoinColumn(name = "movieid", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "genreid", referencedColumnName = "id") })
 	private List<Genre> genres;
-	private String country;
 	private int year;
 	private String info, name;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
+	
 
 	public int getYear() {
 		return year;

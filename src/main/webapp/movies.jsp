@@ -49,7 +49,6 @@
 	
 	function deleteMovie(idm){
 		post("deletemovie?id=" + idm + "&redirect=movies.jsp", null);
-		location.reload(true);
 	}
 </script>
 </head>
