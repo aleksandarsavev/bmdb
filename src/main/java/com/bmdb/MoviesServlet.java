@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bmdb.persist.DBContext;
-import com.bmdb.persist.MoviesProvider;
+import com.bmdb.persist.MoviesService;
 
 
 public class MoviesServlet
@@ -24,7 +24,7 @@ public class MoviesServlet
         String func = request.getParameter("func");
         if (func != null && func.equals("delete"))
         {
-            MoviesProvider movies = DBContext.get().getMoviesProvider();
+            MoviesService movies = DBContext.get().getMoviesProvider();
             String idParameter = request.getParameter("id");
             if (idParameter != null) {
                 movies.delete(movies.getMovie(Integer.parseInt(idParameter)));

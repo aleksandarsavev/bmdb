@@ -4,23 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
 
-public class MoviesProvider {
-    private EntityManager entityManager;
+public class MoviesService extends EntityService{
 
-    MoviesProvider(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    MoviesService(EntityManager entityManager) {
+        super(entityManager);
     }
 
     public List<Movie> getMovies() {
-        TypedQuery<Movie> createQuery = entityManager
-                .createQuery(entityManager.getCriteriaBuilder().createQuery(Movie.class));
-        return createQuery.getResultList();
+        return getEntities(Movie.class);
     }
 
 
@@ -48,32 +40,17 @@ public class MoviesProvider {
     }
 
     public Movie getMovie(int id) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Movie> q = cb.createQuery(Movie.class);
-        Root<Movie> c = q.from(Movie.class);
-        ParameterExpression<Integer> p = cb.parameter(Integer.class);
-        q.select(c).where(cb.equal(c.get("id"), p));
-
-        TypedQuery<Movie> query = entityManager.createQuery(q);
-        query.setParameter(p, id);
-        List<Movie> results = query.getResultList();
-        if (results.isEmpty())
-            return null;
-        return results.get(0);
+        return getById(id, Movie.class);
     }
 
     public void addMovie(Movie movie) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(movie);
-        entityManager.getTransaction().commit();
+        addEntity(movie);
     }
 
 
     public void delete(Movie movie) {
         DBContext.get().getReviewsProvider().removeByMovie(movie);
-        entityManager.getTransaction().begin();
-        entityManager.remove(movie);
-        entityManager.getTransaction().commit();
+        removeEntity(movie);
     }
 
 

@@ -12,14 +12,12 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 
-public class ReviewProvider
+public class ReviewProvider extends EntityService
 {
-    private final EntityManager entityManager;
-
 
     ReviewProvider(EntityManager entityManager)
     {
-        this.entityManager = entityManager;
+        super(entityManager);
     }
 
 
@@ -32,14 +30,14 @@ public class ReviewProvider
 
     public List<Review> getReviewsByUser(User user)
     {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 
         CriteriaQuery<Review> q = cb.createQuery(Review.class);
         Root<Review> c = q.from(Review.class);
         ParameterExpression<User> p = cb.parameter(User.class);
         q.select(c).where(cb.equal(c.get("user"), p));
 
-        TypedQuery<Review> query = entityManager.createQuery(q);
+        TypedQuery<Review> query = getEntityManager().createQuery(q);
         query.setParameter(p, user);
         List<Review> results = query.getResultList();
         return results;
@@ -60,14 +58,14 @@ public class ReviewProvider
      */
     public List<Review> getReviewsByMovie(Movie movie)
     {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 
         CriteriaQuery<Review> q = cb.createQuery(Review.class);
         Root<Review> c = q.from(Review.class);
         ParameterExpression<Movie> p = cb.parameter(Movie.class);
         q.select(c).where(cb.equal(c.get("movie"), p));
 
-        TypedQuery<Review> query = entityManager.createQuery(q);
+        TypedQuery<Review> query = getEntityManager().createQuery(q);
         query.setParameter(p, movie);
         List<Review> results = query.getResultList();
         return results;
@@ -75,14 +73,14 @@ public class ReviewProvider
 
 
     public Review getReviewById(int id) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
 
         CriteriaQuery<Review> q = cb.createQuery(Review.class);
         Root<Review> c = q.from(Review.class);
         ParameterExpression<Integer> p = cb.parameter(Integer.class);
         q.select(c).where(cb.equal(c.get("id"), p));
 
-        TypedQuery<Review> query = entityManager.createQuery(q);
+        TypedQuery<Review> query = getEntityManager().createQuery(q);
         query.setParameter(p, id);
         List<Review> results = query.getResultList();
         return results.isEmpty() ? null : results.get(0);
@@ -102,17 +100,13 @@ public class ReviewProvider
             remove(oldReview);
         }
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(review);
-        entityManager.getTransaction().commit();
+        addEntity(review);
     }
 
 
     public void remove(Review review)
     {
-        entityManager.getTransaction().begin();
-        entityManager.remove(review);
-        entityManager.getTransaction().commit();
+        removeEntity(review);
     }
 
     /**
