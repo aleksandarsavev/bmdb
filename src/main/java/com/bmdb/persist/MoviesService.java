@@ -5,14 +5,14 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 
-public class MoviesService extends EntityService{
+public class MoviesService extends EntityService<Movie>{
 
     MoviesService(EntityManager entityManager) {
-        super(entityManager);
+        super(entityManager,  Movie.class);
     }
 
     public List<Movie> getMovies() {
-        return getEntities(Movie.class);
+        return getEntities();
     }
 
 
@@ -40,7 +40,7 @@ public class MoviesService extends EntityService{
     }
 
     public Movie getMovie(int id) {
-        return getById(id, Movie.class);
+        return getById(id);
     }
 
     public void addMovie(Movie movie) {

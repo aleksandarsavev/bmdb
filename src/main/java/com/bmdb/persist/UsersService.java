@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-public class UsersService extends EntityService {
+public class UsersService extends EntityService<User> {
 
 	UsersService(EntityManager entityManager) {
-		super(entityManager);
+		super(entityManager, User.class);
 	}
 
 	public boolean exist(String name) {
@@ -24,7 +24,7 @@ public class UsersService extends EntityService {
 	}
 
 	public List<User> getUsers() {
-		return getEntities(User.class);
+		return getEntities();
 	}
 
 	public User login(String userName, String password) {
@@ -37,13 +37,13 @@ public class UsersService extends EntityService {
 	}
 
 	public User getUser(String userName) {
-		return getByPrimaryKey(userName, "username", String.class, User.class);
+		return getByPrimaryKey(userName, "username", String.class);
 	}
 
 
     public User getUserById(int id)
     {
-        return getById(id, User.class);
+        return getById(id);
     }
 
 

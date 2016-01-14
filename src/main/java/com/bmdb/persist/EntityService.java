@@ -18,14 +18,16 @@ import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 
-public abstract class EntityService
+public abstract class EntityService<TEntity>
 {
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
+    private final Class<TEntity> entityClass;
 
 
-    protected EntityService(EntityManager entityManager)
+    protected EntityService(EntityManager entityManager, Class<TEntity> entityClass)
     {
         this.entityManager = entityManager;
+        this.entityClass = entityClass;
     }
 
 
@@ -35,49 +37,43 @@ public abstract class EntityService
     }
 
 
-    protected <T> List<T> getEntities(Class<T> clas)
+    protected List<TEntity> getEntities()
     {
-        TypedQuery<T> createQuery = entityManager.createQuery(entityManager.getCriteriaBuilder()
-                                                                           .createQuery(clas));
+        TypedQuery<TEntity> createQuery = entityManager.createQuery(entityManager.getCriteriaBuilder()
+                                                                                 .createQuery(entityClass));
         return createQuery.getResultList();
     }
 
 
-    protected <T> T getById(int id, Class<T> entityClass)
+    protected TEntity getById(int id)
     {
-        return getByPrimaryKey(id, "id", Integer.class, entityClass);
+        return getByPrimaryKey(id, "id", Integer.class);
     }
 
 
-    protected <T, V> T getByPrimaryKey(V primaryValue,
-                                       String primaryKey,
-                                       Class<V> primaryKeyClass,
-                                       Class<T> entityClass)
+    protected <V> TEntity getByPrimaryKey(V primaryValue, String primaryKey, Class<V> primaryKeyClass)
     {
-        List<T> results = filterEntities(primaryValue, primaryKey, primaryKeyClass, entityClass);
+        List<TEntity> results = filterEntities(primaryValue, primaryKey, primaryKeyClass);
         return results.isEmpty() ? null : results.get(0);
     }
 
 
-    protected <T, V> List<T> filterEntities(V filter,
-                                            String filterName,
-                                            Class<V> filterClass,
-                                            Class<T> entityClass)
+    protected <V> List<TEntity> filterEntities(V filter, String filterName, Class<V> filterClass)
     {
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<T> q = cb.createQuery(entityClass);
-        Root<T> c = q.from(entityClass);
+        CriteriaQuery<TEntity> q = cb.createQuery(entityClass);
+        Root<TEntity> c = q.from(entityClass);
         ParameterExpression<V> p = cb.parameter(filterClass);
         q.select(c).where(cb.equal(c.get(filterName), p));
 
-        TypedQuery<T> query = getEntityManager().createQuery(q);
+        TypedQuery<TEntity> query = getEntityManager().createQuery(q);
         query.setParameter(p, filter);
-        List<T> results = query.getResultList();
+        List<TEntity> results = query.getResultList();
         return results;
     }
 
 
-    protected <T> void addEntity(T entity)
+    protected void addEntity(TEntity entity)
     {
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
@@ -85,7 +81,7 @@ public abstract class EntityService
     }
 
 
-    protected <T> void removeEntity(T entity)
+    protected void removeEntity(TEntity entity)
     {
         entityManager.getTransaction().begin();
         entityManager.remove(entity);

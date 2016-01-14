@@ -7,12 +7,12 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 
 
-public class ReviewService extends EntityService
+public class ReviewService extends EntityService<Review>
 {
 
     ReviewService(EntityManager entityManager)
     {
-        super(entityManager);
+        super(entityManager, Review.class);
     }
 
 
@@ -25,7 +25,7 @@ public class ReviewService extends EntityService
 
     public List<Review> getReviewsByUser(User user)
     {
-        return filterEntities(user, "user", User.class, Review.class);
+        return filterEntities(user, "user", User.class);
     }
 
 
@@ -43,12 +43,12 @@ public class ReviewService extends EntityService
      */
     public List<Review> getReviewsByMovie(Movie movie)
     {
-        return filterEntities(movie, "movie", Movie.class, Review.class);
+        return filterEntities(movie, "movie", Movie.class);
     }
 
 
     public Review getReviewById(int id) {
-        return getById(id, Review.class);
+        return getById(id);
     }
 
     
