@@ -43,22 +43,39 @@ public abstract class EntityService
     }
 
 
-    protected <T> T getById(int id, Class<T> clas)
+    protected <T> T getById(int id, Class<T> entityClass)
+    {
+        return getByPrimaryKey(id, "id", Integer.class, entityClass);
+    }
+
+
+    protected <T, V> T getByPrimaryKey(V primaryValue,
+                                       String primaryKey,
+                                       Class<V> primaryKeyClass,
+                                       Class<T> entityClass)
+    {
+        List<T> results = filterEntities(primaryValue, primaryKey, primaryKeyClass, entityClass);
+        return results.isEmpty() ? null : results.get(0);
+    }
+
+
+    protected <T, V> List<T> filterEntities(V filter,
+                                            String filterName,
+                                            Class<V> filterClass,
+                                            Class<T> entityClass)
     {
         CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<T> q = cb.createQuery(clas);
-        Root<T> c = q.from(clas);
-        ParameterExpression<Integer> p = cb.parameter(Integer.class);
-        q.select(c).where(cb.equal(c.get("id"), p));
+        CriteriaQuery<T> q = cb.createQuery(entityClass);
+        Root<T> c = q.from(entityClass);
+        ParameterExpression<V> p = cb.parameter(filterClass);
+        q.select(c).where(cb.equal(c.get(filterName), p));
 
         TypedQuery<T> query = getEntityManager().createQuery(q);
-        query.setParameter(p, id);
+        query.setParameter(p, filter);
         List<T> results = query.getResultList();
-        if (results.isEmpty())
-            return null;
-        return results.get(0);
+        return results;
     }
-    
+
 
     protected <T> void addEntity(T entity)
     {
