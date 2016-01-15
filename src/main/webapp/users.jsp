@@ -14,8 +14,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User management</title>
-<script type="text/javascript" src="script/navigator.js"></script>
-<link rel="stylesheet" type="text/css" href="style/navigator.css" />
 <link rel="stylesheet" type="text/css" href="style/tables.css" />
 <script type="text/javascript">
     function removee(idm) {
@@ -54,7 +52,6 @@
             <%
                 }
             %>
-            <tr>
         </table>
     </div>
 </body>
