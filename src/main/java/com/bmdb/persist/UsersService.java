@@ -37,7 +37,7 @@ public class UsersService extends EntityService<User> {
 	}
 
 	public User getUser(String userName) {
-		return getByPrimaryKey(userName, "username", String.class);
+		return getByPrimaryKey(userName, "userName", String.class);
 	}
 
 
