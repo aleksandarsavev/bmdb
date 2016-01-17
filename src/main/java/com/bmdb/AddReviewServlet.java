@@ -23,9 +23,9 @@ public class AddReviewServlet extends HttpServlet {
 		review.setComment(request.getParameter("comment"));
 		review.setRating(Integer.parseInt(request.getParameter("rating")));
 		review.setMovie(
-				DBContext.get().getMoviesProvider().getMovie(Integer.parseInt(request.getParameter("movieId"))));
+				DBContext.get().getMoviesService().getMovie(Integer.parseInt(request.getParameter("movieId"))));
 		review.setUser((User) request.getSession().getAttribute("username"));
-		DBContext.get().getReviewsProvider().add(review);
+		DBContext.get().getReviewsService().add(review);
 		response.sendRedirect("reviews.jsp?movieId=" + review.getMovie().getId());
 	}
 

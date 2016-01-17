@@ -20,7 +20,7 @@ public class DeleteUserServlet
         throws ServletException, IOException
     {
         String userId = request.getParameter("id");
-        DBContext.get().getUsersProvider().remove(Integer.parseInt(userId));
+        DBContext.get().getUsersService().remove(Integer.parseInt(userId));
         try {
 			Thread.sleep(600);
 		} catch (InterruptedException e) {

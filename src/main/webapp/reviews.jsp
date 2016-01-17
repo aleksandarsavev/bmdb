@@ -15,9 +15,9 @@
 	String parameterMovie = request.getParameter("movieId");
 	List<Review> source;
 	if (parameterMovie != null) {
-		source = DBContext.get().getReviewsProvider().getReviewsByMovie(Integer.parseInt(parameterMovie));
+		source = DBContext.get().getReviewsService().getReviewsByMovie(Integer.parseInt(parameterMovie));
 	} else {
-		source = DBContext.get().getReviewsProvider().getReviewsByUser(parameterUser);
+		source = DBContext.get().getReviewsService().getReviewsByUser(parameterUser);
 	}
 %>
 <body>
@@ -25,12 +25,12 @@
 	<%
 		if (parameterMovie != null) {
 	%><h3>
-		All reviews for the movie '<%=DBContext.get().getMoviesProvider().getMovie(Integer.parseInt(parameterMovie)).getName()%>'
+		All reviews for the movie '<%=DBContext.get().getMoviesService().getMovie(Integer.parseInt(parameterMovie)).getName()%>'
 	</h3>
 	<%
 	} else if (parameterUser != null) {
     %><h3>
-        All reviews from user <%=DBContext.get().getUsersProvider().getUser(parameterUser).getUserName()%>
+        All reviews from user <%=DBContext.get().getUsersService().getUser(parameterUser).getUserName()%>
     </h3>
     <%
     } %>

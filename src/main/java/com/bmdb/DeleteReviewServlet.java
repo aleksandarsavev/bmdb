@@ -14,7 +14,7 @@ public class DeleteReviewServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String reviewId = request.getParameter("id");
-        DBContext.get().getReviewsProvider().remove(Integer.parseInt(reviewId));
+        DBContext.get().getReviewsService().remove(Integer.parseInt(reviewId));
         try {
 			Thread.sleep(600);
 		} catch (InterruptedException e) {

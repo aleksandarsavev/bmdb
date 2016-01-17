@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		User result = DBContext.get().getUsersProvider().login(username, password);
+		User result = DBContext.get().getUsersService().login(username, password);
 		if (result == null) {
 			response.sendRedirect("login.jsp?success=false");
 		} else {

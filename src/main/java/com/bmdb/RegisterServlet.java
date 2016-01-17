@@ -22,7 +22,7 @@ public class RegisterServlet extends HttpServlet {
         bean.setPassword(request.getParameter("password"));
         bean.setName(request.getParameter("name"));
 
-        boolean result = DBContext.get().getUsersProvider().register(bean);
+        boolean result = DBContext.get().getUsersService().register(bean);
         response.getWriter().println(result);
         response.setStatus(200);
         if (result) {

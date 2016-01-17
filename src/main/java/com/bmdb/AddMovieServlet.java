@@ -22,9 +22,9 @@ public class AddMovieServlet extends HttpServlet {
         movie.setInfo(request.getParameter("info"));
         movie.setYear(Integer.parseInt(request.getParameter("year")));
         movie.setGenres(Arrays.asList(request.getParameter("genres").split(",")).stream().filter(x -> x.length() > 0)
-                .map(x -> Integer.parseInt(x)).map(x -> DBContext.get().getGenresProvider().getGenre(x))
+                .map(x -> Integer.parseInt(x)).map(x -> DBContext.get().getGenresService().getGenre(x))
                 .collect(Collectors.toList()));
-        DBContext.get().getMoviesProvider().addMovie(movie);
+        DBContext.get().getMoviesService().addMovie(movie);
         response.sendRedirect("movies.jsp");
     }
 

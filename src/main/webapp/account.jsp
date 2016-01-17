@@ -24,7 +24,7 @@ function deleteReview(reviewId){
     }
     String parameterUser = user.getUserName();
     List<Review> source;
-    source = DBContext.get().getReviewsProvider().getReviewsByUser(parameterUser);
+    source = DBContext.get().getReviewsService().getReviewsByUser(parameterUser);
 %>
 <body>
 	<jsp:include page="navigation.jsp"></jsp:include>

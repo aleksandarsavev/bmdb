@@ -35,7 +35,7 @@
                 <th colspan="2">Options</th>
             </tr>
             <%
-                for (User u : DBContext.get().getUsersProvider().getUsers())
+                for (User u : DBContext.get().getUsersService().getUsers())
                 {
             %>
             <tr>

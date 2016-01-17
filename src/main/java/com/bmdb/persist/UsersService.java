@@ -50,7 +50,7 @@ public class UsersService extends EntityService<User> {
     public void remove(int id)
     {
         User user = getUserById(id);
-        DBContext.get().getReviewsProvider().removeByUser(user);
+        DBContext.get().getReviewsService().removeByUser(user);
         removeEntity(user);
     }
 

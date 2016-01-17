@@ -45,7 +45,7 @@
 			<br> <span>Genres:</span>
 			<div style="max-width: 500px">
 				<%
-					List<Genre> genres = DBContext.get().getGenresProvider().getGenres();
+					List<Genre> genres = DBContext.get().getGenresService().getGenres();
 					for (int i =0; i<genres.size();i++) {
 						Genre genre = genres.get(i);
 				%>

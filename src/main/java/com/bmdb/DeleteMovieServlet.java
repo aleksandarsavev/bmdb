@@ -18,7 +18,7 @@ public class DeleteMovieServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		DBContext.get().getMoviesProvider().delete(id);
+		DBContext.get().getMoviesService().delete(id);
 		try {
 			Thread.sleep(600);
 		} catch (InterruptedException e) {

@@ -6,39 +6,39 @@ import javax.persistence.Persistence;
 
 public class DBContext {
 	private static final DBContext instance = new DBContext();
-	private UsersService userProvider;
+	private UsersService userService;
 	private EntityManagerFactory factory;
 	private EntityManager entityManager;
-	private ReviewService reviewsProvider;
-	private MoviesService moviesProvider;
-	private GenresService genresProvider;
+	private ReviewService reviewsService;
+	private MoviesService moviesService;
+	private GenresService genresService;
 
 	private DBContext() {
 		factory = Persistence.createEntityManagerFactory("bmdb");
 		entityManager = factory.createEntityManager();
-		userProvider = new UsersService(entityManager);
-		reviewsProvider = new ReviewService(entityManager);
-		moviesProvider = new MoviesService(entityManager);
-		genresProvider = new GenresService(entityManager);
+		userService = new UsersService(entityManager);
+		reviewsService = new ReviewService(entityManager);
+		moviesService = new MoviesService(entityManager);
+		genresService = new GenresService(entityManager);
 	}
 
 	public static DBContext get() {
 		return instance;
 	}
 
-	public UsersService getUsersProvider() {
-		return userProvider;
+	public UsersService getUsersService() {
+		return userService;
 	}
 
-	public MoviesService getMoviesProvider() {
-		return moviesProvider;
+	public MoviesService getMoviesService() {
+		return moviesService;
 	}
 
-	public ReviewService getReviewsProvider() {
-		return reviewsProvider;
+	public ReviewService getReviewsService() {
+		return reviewsService;
 	}
 
-	public GenresService getGenresProvider() {
-		return genresProvider;
+	public GenresService getGenresService() {
+		return genresService;
 	}
 }

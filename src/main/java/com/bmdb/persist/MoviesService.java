@@ -49,7 +49,7 @@ public class MoviesService extends EntityService<Movie>{
 
 
     public void delete(Movie movie) {
-        DBContext.get().getReviewsProvider().removeByMovie(movie);
+        DBContext.get().getReviewsService().removeByMovie(movie);
         removeEntity(movie);
     }
 

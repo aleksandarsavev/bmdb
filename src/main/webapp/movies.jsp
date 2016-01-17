@@ -58,7 +58,7 @@
 	<oo id="search" value="<%=search == null ? new String() : search%>" ></oo>
 	<jsp:include page="navigation.jsp"></jsp:include>
     <h3>Movies</h3>
-    <%if(DBContext.get().getMoviesProvider().getMovies().isEmpty()){
+    <%if(DBContext.get().getMoviesService().getMovies().isEmpty()){
         %>
         <span>The movie data base is empty. You can add movies by clicking 
         <a href="addmovie.jsp">here</a> and filling the form.</span><%
@@ -68,12 +68,12 @@
 			value="Search"
 			onclick="search(document.getElementById('searchTxt').value)" />
         
-         <% List<Movie> source = DBContext.get().getMoviesProvider().getMovies();
+         <% List<Movie> source = DBContext.get().getMoviesService().getMovies();
                 if (search != null && search.length() > 0) {
-                    source = DBContext.get().getMoviesProvider().searchInMovies(search, source);
+                    source = DBContext.get().getMoviesService().searchInMovies(search, source);
                 }
                 if (orderBy != null) {
-                    source = DBContext.get().getMoviesProvider().orderBy(orderBy, order.equals("asc"), source);
+                    source = DBContext.get().getMoviesService().orderBy(orderBy, order.equals("asc"), source);
                 }
                 
         if(source.isEmpty()){%>

@@ -24,7 +24,7 @@ public class MoviesServlet
         String func = request.getParameter("func");
         if (func != null && func.equals("delete"))
         {
-            MoviesService movies = DBContext.get().getMoviesProvider();
+            MoviesService movies = DBContext.get().getMoviesService();
             String idParameter = request.getParameter("id");
             if (idParameter != null) {
                 movies.delete(movies.getMovie(Integer.parseInt(idParameter)));

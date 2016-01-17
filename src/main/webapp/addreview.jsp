@@ -14,9 +14,9 @@
 	<jsp:include page="navigation.jsp"></jsp:include>
 	<%
 	    int movieId = Integer.parseInt(request.getParameter("movieId"));
-	    Movie movie = DBContext.get().getMoviesProvider().getMovie(movieId);
+	    Movie movie = DBContext.get().getMoviesService().getMovie(movieId);
 	    User user = (User) session.getAttribute("username");
-        Review review = DBContext.get().getReviewsProvider().getReview(user, movie);
+        Review review = DBContext.get().getReviewsService().getReview(user, movie);
         String oldComment = review==null? "" : review.getComment();
         int oldRating = review==null? 1 : review.getRating();
 	    if (user == null) {

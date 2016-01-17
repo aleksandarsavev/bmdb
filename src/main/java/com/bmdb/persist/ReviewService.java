@@ -18,7 +18,7 @@ public class ReviewService extends EntityService<Review>
 
     public List<Review> getReviewsByUser(String userName)
     {
-        return getReviewsByUser(DBContext.get().getUsersProvider().getUser(userName));
+        return getReviewsByUser(DBContext.get().getUsersService().getUser(userName));
 
     }
 
@@ -31,7 +31,7 @@ public class ReviewService extends EntityService<Review>
 
     public List<Review> getReviewsByMovie(int movie)
     {
-        return getReviewsByMovie(DBContext.get().getMoviesProvider().getMovie(movie));
+        return getReviewsByMovie(DBContext.get().getMoviesService().getMovie(movie));
     }
 
 

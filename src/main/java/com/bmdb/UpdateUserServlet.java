@@ -16,7 +16,7 @@ public class UpdateUserServlet extends HttpServlet {
             throws ServletException, IOException {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        DBContext.get().getUsersProvider().update((User) request.getSession().getAttribute("username"), name, email);
+        DBContext.get().getUsersService().update((User) request.getSession().getAttribute("username"), name, email);
         try {
             Thread.sleep(600);
         } catch (InterruptedException e) {
