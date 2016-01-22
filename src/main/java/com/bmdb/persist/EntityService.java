@@ -1,9 +1,9 @@
 /*
  * EntityService.java
  *
- * created at 8.01.2016 г. by Aleksandar Savev a.savev@seeburger.com;
+ * created at 8.01.2016 г. by savevjr@gmail.com
  *
- * Copyright (c) 2016 SEEBURGER AG, Germany. All Rights Reserved.
+ * Copyright (c) 2016
  */
 package com.bmdb.persist;
 
